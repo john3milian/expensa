@@ -1,0 +1,80 @@
+<!--
+
+<!DOCTYPE html>
+<html>
+<head>
+        <title>Test_text</title>
+</head>
+
+<body onload= "readFile();">
+    <div id = "output"></div>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script type="text/javascript">
+        function readFile() {
+                jQuery.get("graph_datapoints",function(txt) {
+                $('#output').text(txt);
+                    },'text');
+        } 
+    </script>
+    
+</body>
+
+
+
+</html>
+
+-->
+
+<!--
+<!DOCTYPE HTML>
+<html>
+<head>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+
+</head>
+<body>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<script type="text/javascript">
+
+
+window.onload = function () {
+var data = []
+$.get('graph_datapoints', function (data) {
+    data = data;
+    });
+
+
+var chart = new CanvasJS.Chart("chartContainer",{
+	title:{
+		text:"Rendering Chart with dataPoints from External JSON"
+	},
+	data: [{
+		type: "column",
+		dataPoints : [],
+	}]
+});
+
+
+}
+</script>
+</body>
+</html>
+
+-->
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<body>
+
+<script>    
+    var x, message;
+    x = 50;
+    message = "x is equal to ";
+    document.write (x); // prints the value of the message variable
+    document.write (message); //prints the value of x
+</script>
+</body>
+</html>

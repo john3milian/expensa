@@ -1,0 +1,74 @@
+item_type,price,quantity,payment_mode,satisfaction,date,time
+Shoes,2500,1,Gpay,Yes,2021-07-26,14:08:20.032430
+Cigarette,17,1,Gpay,Yes,2021-07-26,14:11:11.544447
+Gram,150,1,cash,Yes,2021-07-26,14:58:40.711546
+Gram,150,1,cash,Yes,2021-07-26,14:58:47.822954
+Body Pillow,1500,1,Bitcoin,Yes,2021-07-26,17:25:23.094722
+Cigarette,17,1,Gpay,Yes,2021-07-26,18:04:06.508473
+Kidneys,1200,2,Bitcoin,No,2021-07-26,18:05:22.286058
+Cigarette,17,6,Gpay,Yes,2021-07-26,18:15:46.186257
+corn,40,2,Gpay,Yes,2021-07-27,10:23:27.995091
+Cigarette,17,1,Gpay,Yes,2021-07-27,10:24:18.748833
+carrots,29,1,Gpay,Yes,2021-07-27,14:23:04.191045
+Cigarette,17,1,Gpay,Yes,2021-07-27,14:38:42.342992
+Smoothie,49,1,Gpay,Yes,2021-07-27,15:23:59.441478
+viper,1200,1,bitcoin,Yes,2021-07-27,15:25:28.291895
+CSGO skin,1500,1,Valve_points,Yes,2021-07-27,15:47:04.911794
+Vegetables,178,3,Gpay,Yes,2021-07-28,10:55:39.592835
+Cigarette,17,1,Gpay,Yes,2021-07-28,10:56:06.604821
+Cigarette,17,1,Gpay,Yes,2021-07-28,12:41:19.925549
+Yogurt Smoothie,49,1,Gpay,Yes,2021-07-28,12:41:46.019519
+Minute maid,20,1,Gpay,Yes,2021-07-28,14:51:48.613804
+Pewdiepie cup,20,1,Bitcoin,Yes,2021-07-28,18:39:38.985655
+Pewdiepie cup,20,1,Bitcoin,Yes,2021-07-28,18:40:08.864490
+Cigarette,17,1,Gpay,Yes,2021-07-29,11:01:07.791417
+Sweetcorn,40,2,Cash,Yes,2021-07-29,11:01:32.389353
+Cigarette,17,1,Gpay,Yes,2021-07-29,11:54:52.633181
+Kindle,40,30,cash,Yes,2021-07-29,11:55:40.729528
+Cake,200,1,Phonepe,No,2021-07-29,11:57:17.776507
+Cake,200,1,Phonepe,No,2021-07-29,11:58:02.336524
+parleG,10,1,credit,Yes,2021-07-29,11:58:58.479799
+Laptop,700,1,Ethereum,Yes,2021-07-29,11:59:43.188567
+pencil,50,30,Dogecoin,No,2021-07-29,12:05:55.231782
+sharpner,10,1,Dogecoin,Yes,2021-07-29,12:07:00.163752
+Eraser,5,1,barter,No,2021-07-29,12:08:15.112270
+BTS album,2500,1,Shitcoin,No,2021-07-29,12:13:52.132383
+Windows,1499,1,Fupacoin,No,2021-07-29,12:15:52.810956
+Pet Food,450,1,cheque,No,2021-07-29,12:24:55.431012
+Delorean,2000,1,Gold_Bars,Yes,2021-07-30,10:23:04.382545
+Corn,35,2,Gpay,Yes,2021-07-30,10:23:42.415665
+Cigarette,17,1,Gpay,Yes,2021-07-30,10:24:08.411268
+Minute maid,20,1,BharatPay,Yes,2021-07-30,10:34:53.566620
+Parle-G,5,1,Soul,Yes,2021-07-30,10:36:41.081622
+Desi corn,30,2,PhonePe,Yes,2021-07-31,12:49:52.166540
+Cigarette,17,1,Credit,No,2021-07-31,12:51:38.896079
+Minute Maid,20,1,PhonePe,Yes,2021-07-31,12:55:33.366233
+puppy,100,1,Gpay,Yes,2021-07-31,12:57:23.263247
+Dog treats,500,1,Gpay,No,2021-07-31,12:58:01.944084
+Smoothie,49,1,Gpay,Yes,2021-07-31,15:05:12.847487
+Lays chips,50,1,Gpay,Yes,2021-07-31,15:07:16.388723
+Mango Smoothie,49,1,Gpay,Yes,2021-08-02,11:31:45.463834
+Cigarette,17,1,Gpay,Yes,2021-08-02,11:32:46.922496
+Cigarette,17,1,Gpay,No,2021-08-02,11:43:08.627173
+Cigarette,17,1,Gpay,No,2021-08-02,11:44:55.547958
+Balloons,20,1,Cash,Yes,2021-08-02,11:45:39.879359
+Cigarette,17,1,Gpay,Yes,2021-08-02,12:16:38.663424
+Football Shoes,3500,1,Cash,Yes,2021-08-02,12:17:56.688054
+Jersey,1500,1,Pitcoin,Very,2021-08-02,12:18:38.140095
+Beanie,400,1,Soul,Yes,2021-08-02,12:32:49.917081
+PissBottle,1500,1,Hexcoins,Hell_No,2021-08-02,12:34:24.007379
+Mop,300,1,Cash,Yes,2021-08-02,12:37:20.858273
+Cigarette,17,1,Gpay,Hmm....,2021-08-02,17:07:28.113003
+Minute Maid,20,1,Gpay,Very,2021-08-02,17:32:37.137264
+Minute Maid,20,1,Gpay,Very,2021-08-02,17:33:19.801004
+Kachi Ghani,430,1,paytm,Very,2021-08-02,17:35:37.772436
+Mouse,400,1,Gpay,Yes,2021-08-02,17:43:51.920753
+Chess Board,500,1,Cash,No,2021-08-02,17:45:20.712817
+Kachi Ghani,180,1,Gpay,Yes,2021-08-03,11:52:59.034752
+Shampoo,570,1,Gpay,Yes,2021-08-03,12:02:16.880677
+table,200,1,Cash,Yes,2021-08-04,13:39:56.462078
+chair,400,1,Gpay,Yes,2021-08-04,13:52:49.981918
+Plushy,1500,1,PhonePe,No,2021-08-04,15:51:12.720016
+PS7,250,1,Cash,Yes,2021-08-04,16:16:34.061010
+Cigarette,17,1,Gpay,Yes,2021-08-04,17:21:18.156001
+Cigarette,34,2,Gpay,Yes,2021-08-05,12:16:56.161056

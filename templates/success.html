@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript">
+
+window.onload = function () {
+var dataPoints1 = [];
+var dataPoints1_a = [];
+var dataPoints2 = [];
+var dataPoints3 = [];
+
+//Replace text file's path according to your requirement.
+$.get("linefile", function(data1) {
+	
+	var allLines1 = data1.split('\n');
+	if(allLines1.length > 0) {
+		for(var i=0; i< allLines1.length; i++) {
+    		var oneLine1 = allLines1[i].split(' ');
+			dataPoints1.push({ label : oneLine1[0], y : parseInt(oneLine1[1])});
+    		}
+    	};
+    $.get("linefile2", function(data1_a) {
+	
+    	var allLines1_a = data1_a.split('\n');
+    	if(allLines1_a.length > 0) {
+    		for(var i=0; i< allLines1_a.length; i++) {
+        		var oneLine1_a = allLines1_a[i].split(' ');
+    			dataPoints1_a.push({ label : oneLine1_a[0], y : parseInt(oneLine1_a[1])});
+        		}
+        	};
+	
+	var chart1 = new CanvasJS.Chart("linechartContainer1", {
+	theme: "light2", // "light2", "dark1", "dark2"
+	animationEnabled: true,		
+	title:{
+		text: "Expense Trend"
+	},
+	zoomEnabled: true,
+	data: [
+	{
+		// Change type to "bar", "area", "spline", "pie",etc.
+		type: "line",
+		dataPoints: dataPoints1	
+	},
+	{
+		// Change type to "bar", "area", "spline", "pie",etc.
+		type: "line",
+		dataPoints: dataPoints1_a	
+	}
+	]
+});
+    chart1.render();
+});
+    
+});
+
+
+$.get("textfile", function(data2) {
+	
+	var allLines2 = data2.split('\n');
+	if(allLines2.length > 0) {
+		for(var i=0; i< allLines2.length; i++) {
+    		var oneLine2 = allLines2[i].split(' ');
+			dataPoints2.push({ label : oneLine2[0], y : parseInt(oneLine2[1])});
+    		}
+    	};
+	
+	var chart2 = new CanvasJS.Chart("barchartContainer2", {
+	theme: "light2", // "light2", "dark1", "dark2"
+	animationEnabled: true,		
+	title:{
+		text: "Payment Gateways"
+	},
+	data: [
+	{
+		// Change type to "bar", "area", "spline", "pie",etc.
+		type: "bar",
+		dataPoints: dataPoints2
+			
+			
+		
+	}
+	]
+});
+    
+    chart2.render();
+});
+
+
+$.get("graph_datapoints", function(data3) {
+	
+	var allLines3 = data3.split('\n');
+	if(allLines3.length > 0) {
+		for(var i=0; i< allLines3.length; i++) {
+    		var oneLine3 = allLines3[i].split(' ');
+			dataPoints3.push({ y : parseFloat(oneLine3[1]), label : oneLine3[0]});
+    		}
+    	};
+var chart3 = new CanvasJS.Chart("piechartContainer3", {
+	theme: "light2",
+	animationEnabled: true,
+	title: {
+		text: "Overall Satisfaction"
+	},
+	data: [{
+		type: "pie",
+		startAngle: 240,
+		yValueFormatString: "#.0%",
+		indexLabel: "{y} {label}",
+		dataPoints: dataPoints3
+	}]
+});
+chart3.render()
+});
+
+
+}
+
+
+
+
+</script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.js"></script>
+</head>
+<body>
+    <center>
+    <h2>\('OvO')/</h2>
+        <form action="purchase" >
+            <input type="submit" value="Enter new Purchase ">
+        </form>
+    <h2>\(*OvO*)/</h2><br>
+    <div id="piechartContainer3" style="height: 480px; width: 320px;"></div><br><br><br>
+    <div id="barchartContainer2" style="height: 480px; width: 320px;"></div><br><br><br>
+    <div id="linechartContainer1" style="height: 480px; width: 320px;"></div><br><br><br>
+    <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    </center>
+</body>
+</html>
