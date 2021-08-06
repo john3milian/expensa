@@ -92,6 +92,10 @@ def refresh():
 
 @app.route('/purchase', methods = ['POST','GET'])
 def submit():
+    graph_1_value_counts()
+    satisfaction_value_counts()
+    price_line_graph()
+    frequency_line_graph()
     if request.method == 'POST':
         item_type_ = request.form.get('itm')
         price_ = request.form.get('pric')
