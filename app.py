@@ -9,10 +9,31 @@ Created on Tue Jul 20 16:07:20 2021
 from flask import Flask,render_template,request,redirect,url_for
 import pandas as pd
 import datetime
+import boto3
+
+s3 = boto3.resource(
+    service_name = 's3',
+    region_name = 'ap-south-1',
+    aws_access_key_id = 'AKIARCTLWLRZS6SJ43S3',
+    aws_secret_access_key = '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',
+)
+
+#expense = s3.Bucket('expensabucket').Object('expense.txt').get()
+#freq_lin_gr_dp = s3.Bucket('expensabucket').Object('frequency_line_graph_datapoints.txt').get()
+#grdpts = s3.Bucket('expensabucket').Object('graph_datapoints.txt').get()
+#price_lingr_dpts = s3.Bucket('expensabucket').Object('price_line_graph_datapoints.txt').get()
+
+
+s3.Bucket('expensabucket').download_file(Key= 'expense.txt', Filename= 'expense.txt')
+s3.Bucket('expensabucket').download_file(Key= 'frequency_line_graph_datapoints.txt', Filename= 'frequency_line_graph_datapoints.txt')
+s3.Bucket('expensabucket').download_file(Key= 'graph_datapoints.txt', Filename= 'graph_datapoints.txt')
+s3.Bucket('expensabucket').download_file(Key= 'price_line_graph_datapoints.txt', Filename= 'price_line_graph_datapoints.txt')
+s3.Bucket('expensabucket').download_file(Key= 'satisfaction_graph_datapoints.txt', Filename= 'satisfaction_graph_datapoints.txt')
+
 
   
 def graph_1_value_counts():
-    table = pd.read_csv('expense.txt')
+    table = pd.read_csv('expense.txt',)
     y_data = table.payment_mode.value_counts(normalize=False)
     labels = y_data.index.tolist()
     count = len(labels)
@@ -26,9 +47,10 @@ def graph_1_value_counts():
         i += 1
     file_text_dp.write('{} {}'.format(str(labels[count - 1]), str(y_data[count - 1])))
     file_text_dp.close()
+    s3.Bucket('expensabucket').upload_file(Filename='graph_datapoints.txt')
     
 def satisfaction_value_counts():
-    table = pd.read_csv('expense.txt')
+    table = pd.read_csv('expense.txt',)
     y_data = table.satisfaction.value_counts(normalize=True)
     labels = y_data.index.tolist()
     count = len(labels)
@@ -42,9 +64,10 @@ def satisfaction_value_counts():
         i += 1
     file_text_dp.write('{} {}'.format(str(labels[count - 1]), str(y_data[count - 1])))
     file_text_dp.close()
+    s3.Bucket('expensabucket').upload_file(Filename='satisfaction_graph_datapoints.txt')
     
 def price_line_graph():
-    table = pd.read_csv('expense.txt')
+    table = pd.read_csv('expense.txt',)
     sum_per_day = table.groupby(['date']).sum()
     y_data = sum_per_day.price.tolist() #Change
     labels = sum_per_day.index.tolist()
@@ -59,9 +82,10 @@ def price_line_graph():
         i += 1
     file_text_dp.write('{} {}'.format(str(labels[count - 1]), str(y_data[count - 1])))
     file_text_dp.close()
+    s3.Bucket('expensabucket').upload_file(Filename='price_line_graph_datapoints.txt')
 
 def frequency_line_graph():
-    table = pd.read_csv('expense.txt')
+    table = pd.read_csv('expense.txt',)
     frequency = table.date.value_counts()
     labels = frequency.index.tolist()
     y_data = frequency.tolist()
@@ -76,6 +100,7 @@ def frequency_line_graph():
         i += 1
     file_text_dp.write('{} {}'.format(str(labels[count - 1]), str(y_data[count - 1])))
     file_text_dp.close()
+    s3.Bucket('expensabucket').upload_file(Filename='frequency_line_graph_datapoints.txt')
 
 
 
@@ -92,10 +117,15 @@ def refresh():
 
 @app.route('/purchase', methods = ['POST','GET'])
 def submit():
+    s3.Bucket('expensabucket').download_file(Key= 'expense.txt', Filename= 'expense.txt')
+    s3.Bucket('expensabucket').download_file(Key= 'frequency_line_graph_datapoints.txt', Filename= 'frequency_line_graph_datapoints.txt')
+    s3.Bucket('expensabucket').download_file(Key= 'expense.txt', Filename= 'graph_datapoints.txt')
+    s3.Bucket('expensabucket').download_file(Key= 'expense.txt', Filename= 'price_line_graph_datapoints.txt')
     graph_1_value_counts()
     satisfaction_value_counts()
     price_line_graph()
     frequency_line_graph()
+            
     if request.method == 'POST':
         item_type_ = request.form.get('itm')
         price_ = request.form.get('pric')
@@ -103,11 +133,12 @@ def submit():
         quantity_ = request.form.get('quantiti')
         happy_ = request.form.get('happi')
         if item_type_ or price_ or payment_ or quantity_ or happy_ != "":
-            file_text = open('expense.txt', 'a')    
+            file_text = open('expenseX.txt', 'a')    
             date = datetime.datetime.now().date()
             time = datetime.datetime.now().time()
             file_text.write("\n{},{},{},{},{},{},{}".format(item_type_,price_,quantity_,payment_,happy_,date,time))
             file_text.close()
+            s3.Bucket('expensabucket').upload_file(Filename='expense.txt')
             #file_text_dps = open('E:/Spyder projects/Expense/graph_datapoints.txt', 'r')
             #file_text_dps.write("")
             graph_1_value_counts()
@@ -152,4 +183,3 @@ def canvas():
 
 if __name__ == '__main__':
     app.run(debug = True)
-    
