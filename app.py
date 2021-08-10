@@ -47,7 +47,7 @@ def graph_1_value_counts():
         i += 1
     file_text_dp.write('{} {}'.format(str(labels[count - 1]), str(y_data[count - 1])))
     file_text_dp.close()
-    s3.Bucket('expensabucket').upload_file(Filename='graph_datapoints.txt')
+    s3.Bucket('expensabucket').upload_file(Key='graph_datapoints.txt', Filename='graph_datapoints.txt')
     
 def satisfaction_value_counts():
     table = pd.read_csv('expense.txt',)
@@ -64,7 +64,7 @@ def satisfaction_value_counts():
         i += 1
     file_text_dp.write('{} {}'.format(str(labels[count - 1]), str(y_data[count - 1])))
     file_text_dp.close()
-    s3.Bucket('expensabucket').upload_file(Filename='satisfaction_graph_datapoints.txt')
+    s3.Bucket('expensabucket').upload_file(Key='satisfaction_graph_datapoints.txt',Filename='satisfaction_graph_datapoints.txt')
     
 def price_line_graph():
     table = pd.read_csv('expense.txt',)
@@ -82,7 +82,7 @@ def price_line_graph():
         i += 1
     file_text_dp.write('{} {}'.format(str(labels[count - 1]), str(y_data[count - 1])))
     file_text_dp.close()
-    s3.Bucket('expensabucket').upload_file(Filename='price_line_graph_datapoints.txt')
+    s3.Bucket('expensabucket').upload_file(Key='price_line_graph_datapoints.txt',Filename='price_line_graph_datapoints.txt')
 
 def frequency_line_graph():
     table = pd.read_csv('expense.txt',)
@@ -100,7 +100,7 @@ def frequency_line_graph():
         i += 1
     file_text_dp.write('{} {}'.format(str(labels[count - 1]), str(y_data[count - 1])))
     file_text_dp.close()
-    s3.Bucket('expensabucket').upload_file(Filename='frequency_line_graph_datapoints.txt')
+    s3.Bucket('expensabucket').upload_file(Key='frequency_line_graph_datapoints.txt',Filename='frequency_line_graph_datapoints.txt')
 
 
 
@@ -138,7 +138,7 @@ def submit():
             time = datetime.datetime.now().time()
             file_text.write("\n{},{},{},{},{},{},{}".format(item_type_,price_,quantity_,payment_,happy_,date,time))
             file_text.close()
-            s3.Bucket('expensabucket').upload_file(Filename='expense.txt')
+            s3.Bucket('expensabucket').upload_file(Key='expense.txt',Filename='expense.txt')
             #file_text_dps = open('E:/Spyder projects/Expense/graph_datapoints.txt', 'r')
             #file_text_dps.write("")
             graph_1_value_counts()
