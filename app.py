@@ -133,7 +133,7 @@ def submit():
         quantity_ = request.form.get('quantiti')
         happy_ = request.form.get('happi')
         if item_type_ or price_ or payment_ or quantity_ or happy_ != "":
-            file_text = open('expenseX.txt', 'a')    
+            file_text = open('expense.txt', 'a')    
             date = datetime.datetime.now().date()
             time = datetime.datetime.now().time()
             file_text.write("\n{},{},{},{},{},{},{}".format(item_type_,price_,quantity_,payment_,happy_,date,time))
