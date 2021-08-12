@@ -87,6 +87,7 @@ def price_line_graph():
 def frequency_line_graph():
     table = pd.read_csv('expense.txt',)
     frequency = table.date.value_counts()
+    frequency = frequency.sort_index(ascending=True)
     labels = frequency.index.tolist()
     y_data = frequency.tolist()
     count = len(labels)
