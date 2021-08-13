@@ -10,6 +10,7 @@ from flask import Flask,render_template,request,redirect,url_for
 import pandas as pd
 import datetime
 import boto3
+import pytz
 
 s3 = boto3.resource(
     service_name = 's3',
@@ -134,9 +135,10 @@ def submit():
         quantity_ = request.form.get('quantiti')
         happy_ = request.form.get('happi')
         if item_type_ or price_ or payment_ or quantity_ or happy_ != "":
-            file_text = open('expense.txt', 'a')    
-            date = datetime.datetime.now().date()
-            time = datetime.datetime.now().time()
+            file_text = open('expense.txt', 'a') 
+            tz_IST = pytz.timezone('Asia/Kolkata')
+            date = datetime.datetime.now(tz_IST).date()
+            time = datetime.datetime.now(tz_IST).time()
             file_text.write("\n{},{},{},{},{},{},{}".format(item_type_,price_,quantity_,payment_,happy_,date,time))
             file_text.close()
             s3.Bucket('expensabucket').upload_file(Key='expense.txt',Filename='expense.txt')
