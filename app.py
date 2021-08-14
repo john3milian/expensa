@@ -10,7 +10,6 @@ from flask import Flask,render_template,request,redirect,url_for
 import pandas as pd
 import datetime
 import boto3
-import pytz
 
 s3 = boto3.resource(
     service_name = 's3',
@@ -30,7 +29,7 @@ s3.Bucket('expensabucket').download_file(Key= 'frequency_line_graph_datapoints.t
 s3.Bucket('expensabucket').download_file(Key= 'graph_datapoints.txt', Filename= 'graph_datapoints.txt')
 s3.Bucket('expensabucket').download_file(Key= 'price_line_graph_datapoints.txt', Filename= 'price_line_graph_datapoints.txt')
 s3.Bucket('expensabucket').download_file(Key= 'satisfaction_graph_datapoints.txt', Filename= 'satisfaction_graph_datapoints.txt')
-
+s3.Bucket('expensabucket').download_file(Key= 'price_mean_textdata.txt', Filename= 'price_mean_textdata.txt')
 
   
 def graph_1_value_counts():
@@ -69,6 +68,7 @@ def satisfaction_value_counts():
     
 def price_line_graph():
     table = pd.read_csv('expense.txt',)
+    price_mean = table.price.mean()
     sum_per_day = table.groupby(['date']).sum()
     y_data = sum_per_day.price.tolist() #Change
     labels = sum_per_day.index.tolist()
@@ -83,8 +83,14 @@ def price_line_graph():
         i += 1
     file_text_dp.write('{} {}'.format(str(labels[count - 1]), str(y_data[count - 1])))
     file_text_dp.close()
+    file_text_mean = open('price_mean_textdata.txt', 'a')
+    file_text_mean.seek(0)
+    file_text_mean.truncate()
+    file_text_mean.write('{0:.2f} per purchase'.format(price_mean))
+    file_text_mean.close()
     s3.Bucket('expensabucket').upload_file(Key='price_line_graph_datapoints.txt',Filename='price_line_graph_datapoints.txt')
-
+    s3.Bucket('expensabucket').upload_file(Key='price_mean_textdata.txt',Filename='price_mean_textdata.txt')
+    
 def frequency_line_graph():
     table = pd.read_csv('expense.txt',)
     frequency = table.date.value_counts()
@@ -114,19 +120,19 @@ def success():
 
 @app.route('/refresh')
 def refresh():
-
+    #graph_1_value_counts()
+    #satisfaction_value_counts()
+    #price_line_graph()
+    #frequency_line_graph()
     return redirect(url_for('submit'))
 
 @app.route('/purchase', methods = ['POST','GET'])
 def submit():
-    s3.Bucket('expensabucket').download_file(Key= 'expense.txt', Filename= 'expense.txt')
-    s3.Bucket('expensabucket').download_file(Key= 'frequency_line_graph_datapoints.txt', Filename= 'frequency_line_graph_datapoints.txt')
-    s3.Bucket('expensabucket').download_file(Key= 'expense.txt', Filename= 'graph_datapoints.txt')
-    s3.Bucket('expensabucket').download_file(Key= 'expense.txt', Filename= 'price_line_graph_datapoints.txt')
-    graph_1_value_counts()
-    satisfaction_value_counts()
-    price_line_graph()
-    frequency_line_graph()
+    #s3.Bucket('expensabucket').download_file(Key= 'expense.txt', Filename= 'expense.txt')
+    #s3.Bucket('expensabucket').download_file(Key= 'frequency_line_graph_datapoints.txt', Filename= 'frequency_line_graph_datapoints.txt')
+    #s3.Bucket('expensabucket').download_file(Key= 'expense.txt', Filename= 'graph_datapoints.txt')
+    #s3.Bucket('expensabucket').download_file(Key= 'expense.txt', Filename= 'price_line_graph_datapoints.txt')
+    
             
     if request.method == 'POST':
         item_type_ = request.form.get('itm')
@@ -135,10 +141,9 @@ def submit():
         quantity_ = request.form.get('quantiti')
         happy_ = request.form.get('happi')
         if item_type_ or price_ or payment_ or quantity_ or happy_ != "":
-            file_text = open('expense.txt', 'a') 
-            tz_IST = pytz.timezone('Asia/Kolkata')
-            date = datetime.datetime.now(tz_IST).date()
-            time = datetime.datetime.now(tz_IST).time()
+            file_text = open('expense.txt', 'a')    
+            date = datetime.datetime.now().date()
+            time = datetime.datetime.now().time()
             file_text.write("\n{},{},{},{},{},{},{}".format(item_type_,price_,quantity_,payment_,happy_,date,time))
             file_text.close()
             s3.Bucket('expensabucket').upload_file(Key='expense.txt',Filename='expense.txt')
@@ -179,6 +184,11 @@ def graphdp():
     file_open = open('satisfaction_graph_datapoints.txt','r')
     return file_open.read()
 
+@app.route('/pricemean')
+def pricemean():
+    file_open = open('price_mean_textdata.txt','r')
+    return file_open.read()
+
 @app.route('/canvas')
 def canvas():
     return render_template('canvas_test.html')
@@ -186,3 +196,4 @@ def canvas():
 
 if __name__ == '__main__':
     app.run(debug = True)
+    
