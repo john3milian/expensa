@@ -39,16 +39,6 @@
 <script type="text/javascript">
 
 window.onload = function () {
-
-var boxrv = document.getElementById('boxr');
-var fukav = document.getElementById('fuka');
-function boxrf(){
-		  boxrv.innerHTML = "\\('OoO')/";
-		}
-function fukaf(){ 
-		  fukav.innerHTML = "\\(*OoO*)/";
-		}
-		
 	
 var dataPoints1 = [];
 var dataPoints1_a = [];
@@ -192,6 +182,16 @@ chart3.render()
 <body>
 <div id="container">
     <center>
+	    <script>
+		var boxrv = document.getElementById('boxr');
+		var fukav = document.getElementById('fuka');
+		function boxrf(){
+		  boxrv.innerHTML = "\\('OoO')/";
+		}
+		function fukaf(){ 
+		  fukav.innerHTML = "\\(*OoO*)/";
+		}	   
+	    </script>
     <h1 id = "boxr" style="font-family:verdana; color: #42A5F5 ;">\('OvO')/</h1><br>
         <form action="purchase" >
             <input type="submit" class = "button" value="Enter new Purchase" style="font-size : 20px; width: 70%; height: 50%;"
