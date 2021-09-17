@@ -53,6 +53,23 @@
           .buttondashboard:active {
                     background:rgba(25, 101, 172, 0.842);
                     }
+                    /* HIDE RADIO */
+                    [type=radio] { 
+                    position: absolute;
+                    opacity: 0;
+                    width: 0;
+                    height: 0;
+                        }
+
+                     /* IMAGE STYLES */
+                    [type=radio] + h2 {
+                     cursor: crosshair;
+                           }
+
+                      /* CHECKED STYLES */
+                      [type=radio]:checked + h2 {
+                       outline: 2px solid #f00;
+                        }
         </style>
 <body>
 <div id="container">
