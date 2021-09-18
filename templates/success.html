@@ -66,7 +66,7 @@ $.get("linefile", function(data1) {
 	theme: "light2", // "light2", "dark1", "dark2"
 	animationEnabled: true,		
 	title:{
-		text: "Expense Trend"
+		text: "Money spent per day"
 	},
 	zoomEnabled: true,
 	data: [
@@ -192,12 +192,13 @@ chart3.render()
 			onclick='getElementById("boxr").innerHTML = "\\(`OoO`)/";
                        		 getElementById("fuka").innerHTML = "\\(*OoO*)/"'>
         </form><br>
-    <h1 id = "fuka" style="font-family:verdana; color: #F06292 ;">\(*OvO*)/</h1><br>
-    <div id="piechartContainer3" style="height: 480px; width: 100%;"></div><br><br><br>
-    <div id="barchartContainer2" style="height: 540px; width: 100%;"></div><br><br><br><br><br><br>
+    <h1 id = "fuka" style="font-family:verdana; color: #F06292 ;">\(*OvO*)/</h1><br>\
+    <div id="linechartContainerFrequency" style="height: 320px; width: 100%;"></div><br><br><br>
     <div id="linechartContainer1" style="height: 320px; width: 100%;"></div>
     <h3 style="font-family:verdana; color: #3333ff ;">Overall Average : <span id="price_mean"></span></h3><br><br>
-    <div id="linechartContainerFrequency" style="height: 320px; width: 100%;"></div><br><br><br>
+    <div id="piechartContainer3" style="height: 480px; width: 100%;"></div><br><br><br>
+    <div id="barchartContainer2" style="height: 540px; width: 100%;"></div><br><br><br><br><br><br>
+
     </center>
 </div>
 </body>
