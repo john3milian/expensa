@@ -18,11 +18,6 @@ s3 = boto3.resource(
     aws_secret_access_key = '+c1fZQ0hRG3nUQ/Rzd49VOOh4/yi38elmKwVESk/',
 )
 
-#expense = s3.Bucket('expensabucket').Object('expense.txt').get()
-#freq_lin_gr_dp = s3.Bucket('expensabucket').Object('frequency_line_graph_datapoints.txt').get()
-#grdpts = s3.Bucket('expensabucket').Object('graph_datapoints.txt').get()
-#price_lingr_dpts = s3.Bucket('expensabucket').Object('price_line_graph_datapoints.txt').get()
-
 
 s3.Bucket('expensabucket').download_file(Key= 'expense.txt', Filename= 'expense.txt')
 s3.Bucket('expensabucket').download_file(Key= 'frequency_line_graph_datapoints.txt', Filename= 'frequency_line_graph_datapoints.txt')
@@ -34,23 +29,22 @@ s3.Bucket('expensabucket').download_file(Key= 'top_most_exp.txt', Filename= 'top
 
 
 def top10mostexp():
-    table = pd.read_csv('expense.txt',)
+    table = pd.read_csv('expense.txt')
     top10exp = table.sort_values(by=['price'],ascending = False)
     top10exp = top10exp[['item_type','price','date']]
-    y_data = top10exp
+    y_data = top10exp[0:10]
     labels = y_data.index.tolist()
     count = len(labels)
+    #print('{} {} {}'.format(y_data.iloc[0][2], y_data.iloc[0][1], (y_data.iloc[0][0]).replace(' ','_')))
     file_text_top10 = open('top_most_exp.txt','a')
     file_text_top10.seek(0)                        # <- This is the missing piece
     file_text_top10.truncate()
     i=0
     while i < (count - 1):
-        file_text_top10.write('{} {}\n'.format(str(labels[i]), str(y_data[i])))
-        #file_text_dp.write('{ label: '+'"'+ str(labels[i])+'"'+',  y: '+str(y_data[i])+' },\n')
+        file_text_top10.write('{} {} {}\n'.format(y_data.iloc[i][2], y_data.iloc[i][1], (y_data.iloc[i][0]).replace(' ','_')))
         i += 1
-    file_text_top10.write('{} {}'.format(str(labels[count - 1]), str(y_data[count - 1])))
+    file_text_top10.write('{} {} {}'.format(y_data.iloc[i][2], y_data.iloc[i][1], (y_data.iloc[i][0]).replace(' ','_')))
     file_text_top10.close()
-    s3.Bucket('expensabucket').upload_file(Key= 'top_most_exp.txt', Filename= 'top_most_exp.txt')
 
   
 def graph_1_value_counts():
@@ -208,8 +202,6 @@ def top_most_exp():
 @app.route('/canvas')
 def canvas():
     return render_template('canvas_test.html')
-
-
 
 
 if __name__ == '__main__':
