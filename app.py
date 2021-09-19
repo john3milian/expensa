@@ -30,6 +30,27 @@ s3.Bucket('expensabucket').download_file(Key= 'graph_datapoints.txt', Filename= 
 s3.Bucket('expensabucket').download_file(Key= 'price_line_graph_datapoints.txt', Filename= 'price_line_graph_datapoints.txt')
 s3.Bucket('expensabucket').download_file(Key= 'satisfaction_graph_datapoints.txt', Filename= 'satisfaction_graph_datapoints.txt')
 s3.Bucket('expensabucket').download_file(Key= 'price_mean_textdata.txt', Filename= 'price_mean_textdata.txt')
+s3.Bucket('expensabucket').download_file(Key= 'top_most_exp.txt', Filename= 'top_most_exp.txt')
+
+
+def top10mostexp():
+    table = pd.read_csv('expense.txt',)
+    top10exp = table.sort_values(by=['price'],ascending = False)
+    top10exp = top10exp[['item_type','price','date']]
+    y_data = top10exp
+    labels = y_data.index.tolist()
+    count = len(labels)
+    file_text_top10 = open('top_most_exp.txt','a')
+    file_text_top10.seek(0)                        # <- This is the missing piece
+    file_text_top10.truncate()
+    i=0
+    while i < (count - 1):
+        file_text_top10.write('{} {}\n'.format(str(labels[i]), str(y_data[i])))
+        #file_text_dp.write('{ label: '+'"'+ str(labels[i])+'"'+',  y: '+str(y_data[i])+' },\n')
+        i += 1
+    file_text_top10.write('{} {}'.format(str(labels[count - 1]), str(y_data[count - 1])))
+    file_text_top10.close()
+    s3.Bucket('expensabucket').upload_file(Key= 'top_most_exp.txt', Filename= 'top_most_exp.txt')
 
   
 def graph_1_value_counts():
@@ -120,19 +141,10 @@ def success():
 
 @app.route('/refresh')
 def refresh():
-    #graph_1_value_counts()
-    #satisfaction_value_counts()
-    #price_line_graph()
-    #frequency_line_graph()
     return redirect(url_for('submit'))
 
 @app.route('/purchase', methods = ['POST','GET'])
 def submit():
-    #s3.Bucket('expensabucket').download_file(Key= 'expense.txt', Filename= 'expense.txt')
-    #s3.Bucket('expensabucket').download_file(Key= 'frequency_line_graph_datapoints.txt', Filename= 'frequency_line_graph_datapoints.txt')
-    #s3.Bucket('expensabucket').download_file(Key= 'expense.txt', Filename= 'graph_datapoints.txt')
-    #s3.Bucket('expensabucket').download_file(Key= 'expense.txt', Filename= 'price_line_graph_datapoints.txt')
-    
             
     if request.method == 'POST':
         item_type_ = request.form.get('itm')
@@ -153,6 +165,7 @@ def submit():
             satisfaction_value_counts()
             price_line_graph()
             frequency_line_graph()
+            top10mostexp()
             
             
             
@@ -179,8 +192,6 @@ def frequencyfileread():
 
 @app.route('/graph_datapoints')
 def graphdp():
-    #file_open = open('canvas_graph_test.txt','r')
-    #file_open = open('graph_datapoints.txt','r')
     file_open = open('satisfaction_graph_datapoints.txt','r')
     return file_open.read()
 
@@ -189,9 +200,16 @@ def pricemean():
     file_open = open('price_mean_textdata.txt','r')
     return file_open.read()
 
+@app.route('/topmostexp')
+def top_most_exp():
+    file_open = open('top_most_exp.txt','r')
+    return file_open.read()
+
 @app.route('/canvas')
 def canvas():
     return render_template('canvas_test.html')
+
+
 
 
 if __name__ == '__main__':
