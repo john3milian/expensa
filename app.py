@@ -45,6 +45,7 @@ def top10mostexp():
         i += 1
     file_text_top10.write('{} {} {}'.format(y_data.iloc[i][2], y_data.iloc[i][1], (y_data.iloc[i][0]).replace(' ','_')))
     file_text_top10.close()
+    s3.Bucket('expensabucket').download_file(Key= 'top_most_exp.txt', Filename= 'top_most_exp.txt')
 
   
 def graph_1_value_counts():
