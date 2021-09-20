@@ -41,11 +41,11 @@ def top10mostexp():
     file_text_top10.truncate()
     i=0
     while i < (count - 1):
-        file_text_top10.write('{} {} {}\n'.format(y_data.iloc[i][2], y_data.iloc[i][1], (y_data.iloc[i][0]).replace(' ','_')))
+        file_text_top10.write('{} {} {}\n'.format(str(y_data.iloc[i][2]), str(y_data.iloc[i][1]), str((y_data.iloc[i][0]).replace(' ','_'))))
         i += 1
-    file_text_top10.write('{} {} {}'.format(y_data.iloc[i][2], y_data.iloc[i][1], (y_data.iloc[i][0]).replace(' ','_')))
+    file_text_top10.write('{} {} {}'.format(str(y_data.iloc[i][2]), str(y_data.iloc[i][1]), str((y_data.iloc[i][0]).replace(' ','_'))))
     file_text_top10.close()
-    s3.Bucket('expensabucket').download_file(Key= 'top_most_exp.txt', Filename= 'top_most_exp.txt')
+    s3.Bucket('expensabucket').upload_file(Key='top_most_exp.txt', Filename='top_most_exp.txt')
 
   
 def graph_1_value_counts():
