@@ -47,11 +47,27 @@ var dataPoints1 = [];
 var dataPoints1_a = [];
 var dataPoints2 = [];
 var dataPoints3 = [];
+let html_data= `<tr>`;
+let top10 = [2, 5, 8, 11, 14, 17, 20, 23, 26, 29]
 
 $.get("pricemean", function(data_pm){
     var price_mean = data_pm;
     document.getElementById("price_mean").innerHTML = price_mean;
 })
+
+$.get("topmostexp", function(data_tme){
+    var top_most_exp = data_tme;
+    top_most_exp = top_most_exp.split(" ");
+    for(let i=0; i<top_most_exp.length; i++){
+    if((top10.includes(i))){
+        //console.log(i);
+        html_data = html_data.concat(`<td> ${top_most_exp[i]} </td></tr><tr>`);
+    }
+    else{html_data = html_data.concat(`<td> ${top_most_exp[i]} </td>
+`);
+            };
+    }
+ });
 
 $.get("linefile", function(data1) {
 	
