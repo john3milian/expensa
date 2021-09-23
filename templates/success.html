@@ -88,8 +88,9 @@ $.get("topmostexp", function(data_tme){
                         })
 	html = `<table style = "font-family: Arial, Helvetica, sans-serif;
 		border-collapse: collapse;
+		transform: translate(-45px,0px);
 		height: 540px
-		width: 100%;"><th>Date</th><th><strong>Purchase</strong></th><th>Amount</th>${html}</table>`
+		width: 100%;"><th>Date</th><th><strong>Purchase</strong></th><th>Amount</th>${html}</table><br><br><br>`
 		console.log(html)
 		ul.innerHTML = html;
  });
