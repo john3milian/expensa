@@ -167,7 +167,7 @@ $.get("graph_datapoints", function(data3) {
 	
 	var allLines3 = data3.split('\n');
 	if(allLines3.length > 0) {
-		let pie_colors= ["#1eff00","#79ff2c","#fbff2c","#ff9d2c","#ff3a2c"]
+		let pie_colors= ["#1eff00","#fbff2c","#00e0e0","#ff9d2c","#ff3a2c"]
 		for(var i=0; i< allLines3.length; i++) {
     		var oneLine3 = allLines3[i].split(' ');
 			dataPoints3.push({ y : parseFloat(oneLine3[1]), label : oneLine3[0], color: pie_colors[i]});
@@ -184,7 +184,7 @@ var chart3 = new CanvasJS.Chart("piechartContainer3", {
 		inradius: 70
 		startAngle: 240,
 		yValueFormatString: "#.0%",
-		indexLabel: "{y} {label}",
+		indexLabel: "{y} {label} {color}",
 		dataPoints: dataPoints3
 	}]
 });
