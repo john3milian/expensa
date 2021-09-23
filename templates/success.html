@@ -77,17 +77,20 @@ $.get("pricemean", function(data_pm){
 })
 
 $.get("topmostexp", function(data_tme){
+    const ul = document.querySelector('.top10table');
     var top_most_exp = data_tme;
-    top_most_exp = top_most_exp.split(" ");
-    for(let i=0; i<top_most_exp.length; i++){
-    if((top10.includes(i))){
-        //console.log(i);
-        html_data = html_data.concat(`<td> ${top_most_exp[i]} </td></tr><tr>`);
-    }
-    else{html_data = html_data.concat(`<td> ${top_most_exp[i]} </td>
-`);
-            };
-    }
+    let ninjas = top_most_exp.split(" ");
+    ninjas.forEach((ninja,index) => {if (top10.includes(index)){
+                            html +=`<td style= "text-align: left;">${ninja}</td></tr><tr>`;   //concat
+                                }
+                         else {html+=`<td>${ninja}</td>` ;   
+                            }
+                        })
+	html = `<table style = "font-family: Arial, Helvetica, sans-serif;
+		border-collapse: collapse;
+		width: 80%;"><th>Date</th><th>Purchase</th><th>Amount</th>${html}</table>`
+		console.log(html)
+		ul.innerHTML = html;
  });
 
 $.get("linefile", function(data1) {
@@ -237,7 +240,7 @@ chart3.render()
     <h1 id = "fuka" style="font-family:verdana; color: #F06292 ;">\(*OvO*)/</h1><br><br>
 
     <h3 style="font-family:verdana; color: rgb(251, 255, 35); background-color: rgba(0, 0, 0, 0);">Top Expensive Purchases</h3><br><br>
-    <ul class="people"></ul>
+    <ul class="top10table"></ul>
     <div id="linechartContainerFrequency" style="height: 320px; width: 100%;"></div><br><br><br>
     <div id="linechartContainer1" style="height: 320px; width: 100%;"></div>
     <h3 style="font-family:verdana; color: #3333ff ;">Overall Average : <span id="price_mean"></span></h3><br><br>
