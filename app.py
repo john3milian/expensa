@@ -147,7 +147,7 @@ def submit():
         payment_ = request.form.get('paymant')
         quantity_ = request.form.get('quantiti')
         happy_ = request.form.get('happi')
-        if item_type_ or price_ or payment_ or quantity_ or happy_ != "":
+        if item_type_ or price_ or payment_ or quantity_ or happy_ != "" or "None":
             file_text = open('expense.txt', 'a')    
             date = datetime.datetime.now().date()
             time = datetime.datetime.now().time()
