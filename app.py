@@ -30,7 +30,7 @@ s3.Bucket('expensabucket').download_file(Key= 'top_most_exp.txt', Filename= 'top
 
 def top10mostexp():
     table = pd.read_csv('expense.txt')
-    top10exp = table.sort_values(by=['price'],ascending = False)
+    top10exp = table.sort_values(by=['price'],ascending = False) #
     top10exp = top10exp[['item_type','price','date']]
     y_data = top10exp[0:10]
     labels = y_data.index.tolist()
